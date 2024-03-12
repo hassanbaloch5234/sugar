@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Styled Countdown Timer</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    #timer-container {
+      text-align: center;
+    }
+
+    #timer {
+      font-size: 2em;
+      color: #333;
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+<div id="timer-container">
+  <div id="timer"></div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Set the countdown duration in seconds (5 minutes)
+  var duration = 5 * 60;
+
+  // Function to update the timer
+  function updateTimer() {
+    var seconds = duration % 60;
+    var minutes = Math.floor((duration / 60) % 60);
+    var hours = Math.floor((duration / (60 * 60)) % 24);
+    var days = Math.floor(duration / (60 * 60 * 24));
+
+    // Display the timer in the "timer" div
+    document.getElementById("timer").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+    // Decrease the duration by 1 second
+    duration--;
+
+    // Check if the timer has reached 0
+    if (duration < 0) {
+      clearInterval(timerInterval); // Stop the timer when it reaches 0
+      document.getElementById("timer").innerHTML = "Timer Expired!";
+    }
+  }
+
+  // Initial call to updateTimer to display the timer immediately
+  updateTimer();
+
+  // Set up an interval to update the timer every second
+  var timerInterval = setInterval(updateTimer, 1000);
+});
+</script>
+
+</body>
+</html>
+
